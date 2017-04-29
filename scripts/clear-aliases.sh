@@ -15,9 +15,9 @@
 #   Ubuntu 17.04
 
 DATE=`date '+%Y%m%d_%H%M%S'`
-\echo -e "\e[1m\e[43mBacking up aliases to ~/backups/alias.$DATE\e[0m"
-\mkdir -p ~/backups
-\alias > ~/backups/alias.$DATE
+\echo -e "\e[1m\e[43mBacking up aliases to ~/backups/alias.$DATE/alias\e[0m"
+\mkdir -p ~/backups/alias.$DATE
+\alias > ~/backups/alias.$DATE/alias
 \unalias -a
 echo -e "\e[1m\e[42mFinished clearing aliases\e[0m"
 
