@@ -24,6 +24,7 @@
 # Tested on:
 #   Ubuntu 17.04
 
+DATE=`date '+%Y%m%d_%H%M%S'`
 INBOUND_PORTS=$(echo $1 | sed "s/,/ /g")
 OUTBOUND_PORTS=$(echo $2 | sed "s/,/ /g")
 if [[ ! -z $INBOUND_PORTS ]]
@@ -35,6 +36,9 @@ then
     sudo apt-get update || exit
     sudo apt-get -y install ufw || exit
   fi
+  echo -e "\e[1m\e[43mBacking up /etc/ufw to ~/backups/ufw.$DATE/ufw\e[0m"
+  mkdir -p ~/backups/ufw.$DATE
+  sudo cp -a /etc/ufw ~/backups/ufw.$DATE/ufw
   sudo echo y | sudo ufw reset
   sudo ufw default deny incoming
   sudo ufw default allow outgoing
