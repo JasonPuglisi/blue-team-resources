@@ -45,6 +45,7 @@ then
   if [[ ! -z $OUTBOUND_PORTS ]]
   then
     sudo ufw default deny outgoing
+    sudo sed -i '/^COMMIT$/c\-A ufw-before-output -p icmp -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT\n-A ufw-before-output -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT\nCOMMIT' /etc/ufw/before.rules
     for outbound_port in $OUTBOUND_PORTS
     do
       sudo ufw allow out $outbound_port
